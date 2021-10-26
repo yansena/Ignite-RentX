@@ -13,6 +13,7 @@ LocaleConfig.locales['pt-br'] = {
     dayNames: ['Domingo', 'Segunda', 'Terca', 'Quarta', 'Quinta', 'Sexta', 'Sabado'],
     dayNamesShort: ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'],
 }
+
 LocaleConfig.defaultLocale = 'pt-br';
 
 export function Calendar() {
@@ -43,7 +44,7 @@ export function Calendar() {
                 textMonthFontFamily: fonts.secondary_600,
                 monthTextColor: colors.title,
                 arrowStyle:{
-                    marginHorizontal: 15
+                    marginHorizontal: -15
                 }
             }}
 
