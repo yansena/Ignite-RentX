@@ -26,18 +26,9 @@ export function Home() {
 
     const navigation = useNavigation();
 
-    const carData = {
-        brand: "audi",
-        name: "RS 5 Coupe",
-        rent: {
-            period: 'ao dia',
-            price: 120
-        },
-        thumbnail: 'https://img1.gratispng.com/20171220/kiq/audi-png-car-image-5a3b1f1eb47de9.9104985015138240307393.jpg'
-    }
 
-    function handleCarDetails(){
-        navigation.navigate('CarDetails')
+    function handleCarDetails(car: CarDTO){
+        navigation.navigate('CarDetails', { car })
     }
 
     useEffect(() => {
@@ -53,7 +44,9 @@ export function Home() {
         }
 
         fetchCars();
-    },[])
+    },[]);
+    
+    console.log(cars);
 
     return (
         <Container>
@@ -78,7 +71,7 @@ export function Home() {
                     data={cars}
                     keyExtractor= {item => item.id}
                     renderItem={({item}) => 
-                        <Car data={item} onPress={handleCarDetails}/> 
+                        <Car data={item} onPress={() => handleCarDetails(item)}/> 
                     }
                 />
             }
