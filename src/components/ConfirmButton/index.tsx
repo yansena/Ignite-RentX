@@ -7,20 +7,16 @@ import {
 } from './styles';
 
 interface Props extends RectButtonProps {
-    title: string;
-    color?: string;
+    title: string
 }
 
-export function Button({
+export function ConfirmButton({
     title,
-    color,
     ...rest
-}: Props) {
+} : Props) {
     return (
-        <Container {...rest} color={color}>
-            <Title>
-                 {title}
-            </Title>
+        <Container {...rest}>
+            <Title>{title}</Title>
         </Container>
     );
 }
