@@ -83,7 +83,7 @@ export const About = styled.Text`
     line-height: ${RFValue(25)}px;
 `;
 
-export const Acessories = styled.View`
+export const Accessories = styled.View`
     width: 100%;
 
     flex-direction: row;
