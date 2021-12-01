@@ -54,7 +54,7 @@ export function Home() {
         fetchCars();
     },[]);
     
-    console.log(cars);
+    // console.log(cars);
 
     return (
         <Container>
@@ -69,7 +69,7 @@ export function Home() {
                     <Logo width={RFValue(108)} height={RFValue(12)}/>
 
                     <TotalCars>
-                        Total de 12 Carros
+                        Total de {cars.length} Carros
                     </TotalCars>
                 </HeaderContent>
             </Header>

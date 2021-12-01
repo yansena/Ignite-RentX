@@ -61,7 +61,7 @@ interface RentalPeriod {
 }
 
 export function SchedulingDetails() {
-
+    const [ loading, setLoading ] = useState(false);
     const [ rentalPeriod, setRentalPeriod ] = useState<RentalPeriod>({} as RentalPeriod);
     
     const { colors, fonts } = useTheme();
@@ -78,6 +78,7 @@ export function SchedulingDetails() {
     }
 
     async function handleConfirmScheduling(){
+        setLoading(true);
         const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`)
 
         const unavailable_dates = [
@@ -86,15 +87,20 @@ export function SchedulingDetails() {
         ];
 
         await api.post('schedules_byuser', {
-            user_id: 2,
-            car
+            user_id: 1,
+            car,
+            startDate: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyyy'),
+            endDate: format(getPlatformDate(new Date(dates[dates.length - 1])), 'dd/MM/yyyy')
         });
 
         await api.put(`/schedules_bycars/${car.id}`, {
             id: car.id,
             unavailable_dates
         }).then(() => navigation.navigate('SchedulingComplete'))
-        .catch(() => Alert.alert('Nao foi possivel confirmar o agendamento'))
+        .catch(() => {
+            setLoading(false)
+            Alert.alert('Nao foi possivel confirmar o agendamento')
+        })
     }
 
     useEffect(() => {
@@ -174,7 +180,13 @@ export function SchedulingDetails() {
             </Content>
 
             <Footer>
-                <Button title="Alugar Agora" onPress={handleConfirmScheduling} color={colors.success}/>
+                <Button 
+                    title="Alugar Agora" 
+                    onPress={handleConfirmScheduling} 
+                    color={colors.success}
+                    enabled={!loading}
+                    loading={loading}
+                />
             </Footer>
         </Container>
     );
