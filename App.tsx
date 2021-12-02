@@ -2,7 +2,7 @@
 import React from 'react';
 import AppLoading from 'expo-app-loading';
 import { ThemeProvider } from 'styled-components';
-
+import * as SplashScreen from 'expo-splash-screen';
 import { 
   useFonts,
   Inter_400Regular,
