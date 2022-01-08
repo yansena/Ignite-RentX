@@ -26,7 +26,6 @@ import {
     HeaderContent,
     TotalCars,
     CarList,
-    MyCarsButton
 } from './styles';
 
 
@@ -54,15 +53,17 @@ export function Home() {
     })
 
     const onGestureEvent = useAnimatedGestureHandler({
-        onStart(){
-
+        onStart(_, ctx: any){
+           ctx.positionX = positionX.value;
+           ctx.positionY = positionY.value;
         },
-        onActive(event){
-            positionX.value = event.translationX
-            positionY.value = event.translationY
+        onActive(event, ctx: any){
+            positionX.value = ctx.positionX + event.translationX
+            positionY.value = ctx.positionY + event.translationY
         },
         onEnd(){
-
+            positionX.value = 0 ;
+            positionY.value = 0;
         }
     });
 

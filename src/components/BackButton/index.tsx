@@ -7,6 +7,7 @@ import { useTheme } from 'styled-components';
 import {
     Container
 } from './styles';
+import { TouchableOpacity } from 'react-native';
 
 interface Props extends BorderlessButtonProps {
     color?: string;
