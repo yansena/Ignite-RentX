@@ -1,6 +1,7 @@
 import React ,{ useEffect, useState }from 'react';
 import { StatusBar, StyleSheet, BackHandler } from 'react-native'
 import { RectButton, PanGestureHandler } from 'react-native-gesture-handler';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons'
@@ -11,14 +12,14 @@ import Animated, {
     useAnimatedGestureHandler
 } from 'react-native-reanimated';
 
-import Logo from '../../assets/logo.svg';
-
 import { Car } from '../../components/Car';
 import { Load } from '../../components/Load';
 import { LoadAnimation } from '../../components/LoadAnimation';
 
+import Logo from '../../assets/logo.svg';
 import { api }  from '../../services/api';
 import { CarDTO } from '../../dtos/carDTO';
+import {RootStackParamList} from "../../routes/stack.routes";
 
 
 import {
@@ -37,7 +38,7 @@ export function Home() {
     const [ cars, setCars ] = useState<CarDTO[]>([]);
     const [ loading, setLoading ] = useState(true);
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     const { colors, fonts} = useTheme();
 
@@ -70,7 +71,7 @@ export function Home() {
 
 
     function handleCarDetails(car: CarDTO){
-        navigation.navigate('CarDetails', { car })
+        navigation.navigate('CarDetails', { car });
     }
 
     function handleOpenMyCar(){
