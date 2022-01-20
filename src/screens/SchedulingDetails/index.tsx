@@ -4,6 +4,8 @@ import { Alert } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {RootStackParamList} from "../../routes/stack.routes";
 
 import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
@@ -66,7 +68,7 @@ export function SchedulingDetails() {
     
     const { colors, fonts } = useTheme();
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     const route = useRoute();
     const { car, dates  } = route.params as Params;
@@ -96,7 +98,11 @@ export function SchedulingDetails() {
         await api.put(`/schedules_bycars/${car.id}`, {
             id: car.id,
             unavailable_dates
-        }).then(() => navigation.navigate('SchedulingComplete'))
+        }).then(() => navigation.navigate('Confirmation', {
+            nextScreenRoute: 'Home',
+            title: 'Carro Alugado',
+            message: `Agora você só precisa ir\naté a concessionária da RentX\npegar o seu automóvel`
+        }))
         .catch(() => {
             setLoading(false)
             Alert.alert('Nao foi possivel confirmar o agendamento')

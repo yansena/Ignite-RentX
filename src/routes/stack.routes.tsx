@@ -5,22 +5,29 @@ import { Home } from '../screens/Home';
 import { CarDetails } from '../screens/CarDetails';
 import { Scheduling } from '../screens/Scheduling';
 import { SchedulingDetails } from '../screens/SchedulingDetails';
-import { SchedulingComplete } from '../screens/SchedulingComplete';
+import { Confirmation } from '../screens/Confirmation';
 import { MyCars } from '../screens/MyCars';
 import { Splash } from '../screens/Splash';
 import { SignIn } from '../screens/SignIn';
 import {FirstStep} from "../screens/SignUp/FirstStep";
+import {SecondStep} from "../screens/SignUp/SecondStep";
+
 import {CarDTO} from "../dtos/carDTO";
 
 
 export type RootStackParamList = {
     SignIn: undefined;
     FirstStep: undefined;
+    SecondStep: { user: object };
     Home: undefined;
     CarDetails: { car: CarDTO};
     Scheduling: undefined;
     SchedulingDetails: undefined;
-    SchedulingComplete: undefined;
+    Confirmation: {
+        nextScreenRoute: string;
+        title: string;
+        message: string;
+    };
     MyCars: undefined;
 }
 
@@ -43,6 +50,10 @@ export function StackRoutes(){
                 name="FirstStep"
                 component={FirstStep}
             />
+            <Screen
+                name="SecondStep"
+                component={SecondStep}
+            />
             <Screen 
                 name="Home"
                 component={Home}
@@ -63,8 +74,8 @@ export function StackRoutes(){
                 component={SchedulingDetails}
             />
             <Screen 
-                name="SchedulingComplete"
-                component={SchedulingComplete}
+                name="Confirmation"
+                component={Confirmation}
             />
             <Screen 
                 name="MyCars"

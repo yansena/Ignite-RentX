@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 import {useNavigation} from "@react-navigation/native";
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
+import { useAuth } from '../../hooks/auth'
 import {
     StatusBar,
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
-    Keyboard, Alert
+    Keyboard,
+    Alert
 } from 'react-native'
 
 import { Button } from '../../components/Button';
@@ -37,6 +38,8 @@ export function SignIn() {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    const { signIn } = useAuth()
+
 
     async function  handleSignIn() {
         try{
@@ -49,9 +52,9 @@ export function SignIn() {
             });
 
             await schema.validate({ email, password })
-            Alert.alert('Tudo Certo')
+            // Alert.alert('Tudo Certo')
 
-            //Fazer Login
+            signIn({email, password});
         }catch (error){
             if(error instanceof Yup.ValidationError){
                 Alert.alert('Opa', error.message)
