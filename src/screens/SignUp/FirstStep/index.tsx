@@ -24,7 +24,7 @@ import { Bullet } from "../../../components/Bullet";
 import {Input} from "../../../components/Input";
 import {Button} from "../../../components/Button";
 
-import {RootStackParamList} from "../../../routes/stack.routes";
+import {RootStackParamList} from "../../../routes/app.stack.routes";
 import {err} from "react-native-svg/lib/typescript/xml";
 
 

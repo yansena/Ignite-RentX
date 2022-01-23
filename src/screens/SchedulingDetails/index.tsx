@@ -5,7 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import {RootStackParamList} from "../../routes/stack.routes";
+import {RootStackParamList} from "../../routes/app.stack.routes";
 
 import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
@@ -73,7 +73,7 @@ export function SchedulingDetails() {
     const route = useRoute();
     const { car, dates  } = route.params as Params;
 
-    const rentTotal = Number(dates.length * car.rent.price)
+    const rentTotal = Number(dates.length * car.price)
 
     function handleBack(){
         navigation.goBack();
@@ -134,8 +134,8 @@ export function SchedulingDetails() {
                     </Description>
 
                     <Rent>
-                        <Period> {car.rent.period} </Period>
-                        <Price>R$ {car.rent.price}</Price>
+                        <Period> {car.period} </Period>
+                        <Price>R$ {car.price}</Price>
                     </Rent>
                 </Details>
 
@@ -177,7 +177,7 @@ export function SchedulingDetails() {
                     <RentalPriceDetails>
                         <RentalPriceQuota>
                             {
-                                `R$ ${car.rent.price} x${dates.length} diarias`
+                                `R$ ${car.price} x${dates.length} diarias`
                             }
                         </RentalPriceQuota>
                         <RentalPriceTotal>R$ {rentTotal},00</RentalPriceTotal>

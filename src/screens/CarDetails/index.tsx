@@ -3,6 +3,8 @@ import { StatusBar, StyleSheet } from 'react-native';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
 
 import Animated, { 
     useSharedValue, 
@@ -17,6 +19,7 @@ import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 import { Button } from '../../components/Button';
+import {RootStackParamList} from "../../routes/app.stack.routes";
 
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 
@@ -46,7 +49,7 @@ export interface Params {
 
 export function CarDetails() {
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const route = useRoute();
     const { car } = route.params as Params;
     const { colors } = useTheme();
@@ -129,8 +132,8 @@ export function CarDetails() {
                     </Description>
 
                     <Rent>
-                        <Period>{car.rent.period}</Period>
-                        <Price>R$ {car.rent.price}</Price>
+                        <Period>{car.period}</Period>
+                        <Price>R$ {car.price}</Price>
                     </Rent>
                 </Details>
 
@@ -147,10 +150,6 @@ export function CarDetails() {
                 </Accessories>
 
                 <About>
-                    {car.about}
-                    {car.about}
-                    {car.about}
-                    {car.about}
                     {car.about}
                 </About>
             </Animated.ScrollView>

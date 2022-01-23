@@ -17,7 +17,7 @@ import { PasswordInput } from '../../components/PasswordInput';
 
 import theme from '../../styles/theme';
 
-import {RootStackParamList} from "../../routes/stack.routes";
+import {RootStackParamList} from "../../routes/app.stack.routes";
 
 
 import {

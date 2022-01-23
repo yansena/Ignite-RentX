@@ -1,6 +1,8 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect } from 'react';
 import { Button, StyleSheet, Dimensions } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {RootStackParamList} from "../../routes/app.stack.routes";
 
 import Animated, { 
     useSharedValue, 
@@ -27,7 +29,7 @@ interface Props {
 
 export function Splash() {
 
-    const { navigate } = useNavigation();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     
     const splashAnimation = useSharedValue(0);
 
@@ -66,7 +68,7 @@ export function Splash() {
     });
 
     function startApp(){
-        navigate('Home')
+        navigation.navigate('SignIn')
     }
 
     useEffect(() => {

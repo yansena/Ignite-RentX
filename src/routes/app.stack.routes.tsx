@@ -16,12 +16,13 @@ import {CarDTO} from "../dtos/carDTO";
 
 
 export type RootStackParamList = {
+    Splash: undefined;
     SignIn: undefined;
     FirstStep: undefined;
     SecondStep: { user: object };
     Home: undefined;
     CarDetails: { car: CarDTO};
-    Scheduling: undefined;
+    Scheduling: { car: CarDTO};
     SchedulingDetails: undefined;
     Confirmation: {
         nextScreenRoute: string;
@@ -34,32 +35,12 @@ export type RootStackParamList = {
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 
 
-export function StackRoutes(){
+export function AppStackRoutes(){
     return(
-        <Navigator screenOptions={{
-            headerShown: false
-        }}
-            initialRouteName="SignIn"
-        >
-
-            <Screen 
-                name="SignIn"
-                component={SignIn}
-            />
+        <Navigator screenOptions={{headerShown: false}}>
             <Screen
-                name="FirstStep"
-                component={FirstStep}
-            />
-            <Screen
-                name="SecondStep"
-                component={SecondStep}
-            />
-            <Screen 
                 name="Home"
                 component={Home}
-                options={{ 
-                    gestureEnabled: false
-                }}
             />
             <Screen 
                 name="CarDetails"

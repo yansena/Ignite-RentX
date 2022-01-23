@@ -22,7 +22,7 @@ import { Bullet } from "../../../components/Bullet";
 import {PasswordInput} from "../../../components/PasswordInput";
 import {Button} from "../../../components/Button";
 
-import {RootStackParamList} from "../../../routes/stack.routes";
+import {RootStackParamList} from "../../../routes/app.stack.routes";
 import {api} from "../../../services/api";
 
 interface Params{
