@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+ import React, { useState } from 'react';
 import * as Yup from 'yup';
 import {useNavigation} from "@react-navigation/native";
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -18,7 +18,6 @@ import { PasswordInput } from '../../components/PasswordInput';
 import theme from '../../styles/theme';
 
 import {RootStackParamList} from "../../routes/app.stack.routes";
-
 
 import {
     Container,
