@@ -24,7 +24,7 @@ const userSchema = tableSchema({
             type: 'string'
         },
         {
-            name: 'token ',
+            name: 'token',
             type: 'string'
         },
     ]
