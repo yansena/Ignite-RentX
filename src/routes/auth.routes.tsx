@@ -48,7 +48,7 @@ export function AuthRoutes(){
                 name="SecondStep"
                 component={SecondStep}
             />
-            <Screen 
+            <Screen
                 name="Confirmation"
                 component={Confirmation}
             />

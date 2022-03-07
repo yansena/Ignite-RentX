@@ -6,6 +6,8 @@ import {RootStackParamList} from "../../routes/app.stack.routes";
 
 import LogoSvg from '../../assets/logo_background_gray.svg';
 import DoneSvg from '../../assets/done.svg';
+
+
 import {
     Container,
     Content,

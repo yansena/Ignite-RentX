@@ -7,13 +7,9 @@ import { Scheduling } from '../screens/Scheduling';
 import { SchedulingDetails } from '../screens/SchedulingDetails';
 import { Confirmation } from '../screens/Confirmation';
 import { MyCars } from '../screens/MyCars';
-import { Splash } from '../screens/Splash';
-import { SignIn } from '../screens/SignIn';
-import {FirstStep} from "../screens/SignUp/FirstStep";
-import {SecondStep} from "../screens/SignUp/SecondStep";
 
+import { Car } from "../database/model/Car";
 import {CarDTO} from "../dtos/carDTO";
-
 
 export type RootStackParamList = {
     Splash: undefined;
@@ -21,7 +17,7 @@ export type RootStackParamList = {
     FirstStep: undefined;
     SecondStep: { user: object };
     Home: undefined;
-    CarDetails: { car: CarDTO};
+    CarDetails: { car: Car};
     Scheduling: { car: CarDTO};
     SchedulingDetails: undefined;
     Confirmation: {

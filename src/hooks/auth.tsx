@@ -30,6 +30,7 @@ interface AuthContextData {
     user: User;
     signIn: (credentials: SignInCredentials) => Promise<void>;
     signOut: () => Promise<void>;
+    updatedUser: (user: User) => Promise<void>;
 }
 
 interface AuthProviderProps{
@@ -53,8 +54,9 @@ function AuthProvider({ children }: AuthProviderProps){
             api.defaults.headers.common.authorization = `Bearer ${token}`;
 
             const userCollection = database.get<ModelUser>('users')
+
             await database.write(async () => {
-                await userCollection.create((newUser) => {
+                const dataUser = await userCollection.create((newUser) => {
                     newUser.user_id = user.id
                     newUser.name = user.name
                     newUser.email = user.email
@@ -62,10 +64,12 @@ function AuthProvider({ children }: AuthProviderProps){
                     newUser.avatar = user.avatar
                     newUser.token = token
                 })
+                const userData = dataUser._raw as unknown as User;
+                setData(userData);
             });
 
 
-            setData({...user, token});
+
         } catch (error) {
             console.log(error)
         }
@@ -75,14 +79,30 @@ function AuthProvider({ children }: AuthProviderProps){
     async function signOut(){
         try{
             const userCollection = database.get<ModelUser>('users');
-            await database.write( async () => {
+            await database.write(async () => {
                 const userSelected = await userCollection.find(data.id);
-                console.log(userSelected)
                 await userSelected.destroyPermanently();
             });
 
             setData({} as User);
         } catch (error){
+            throw new Error(error)
+        }
+    }
+
+    async function updatedUser(user: User){
+        try {
+            const userCollection = database.get<ModelUser>('users');
+            await database.write(async () => {
+                const userSelected = await userCollection.find(user.id)
+                await userSelected.update((userData) => {
+                    userData.name = user.name
+                    userData.driver_license = user.driver_license
+                    userData.avatar = user.avatar
+                });
+            });
+            setData(user)
+        } catch (error) {
             throw new Error(error)
         }
     }
@@ -106,7 +126,8 @@ function AuthProvider({ children }: AuthProviderProps){
         <AuthContext.Provider value={{
             user: data,
             signIn,
-            signOut
+            signOut,
+            updatedUser
         }}>
             {children}
         </AuthContext.Provider>

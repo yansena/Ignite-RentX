@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from "react-native";
+import {KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Alert} from "react-native";
 import {
     Container,
     Header,
@@ -20,14 +20,16 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import {useNavigation} from "@react-navigation/native";
 import {Feather} from "@expo/vector-icons";
 import * as ImagePicker from 'expo-image-picker';
+import * as Yup from 'yup';
 
 import {useAuth} from "../../hooks/auth";
 import {Input} from "../../components/Input";
 import {PasswordInput} from "../../components/PasswordInput";
 import {BackButton} from "../../components/BackButton";
+import {Button} from "../../components/Button";
 
 export function Profile() {
-    const { user, signOut } = useAuth();
+    const { user, signOut, updatedUser } = useAuth();
 
     const { colors, fonts } = useTheme();
     const navigation = useNavigation();
@@ -39,7 +41,7 @@ export function Profile() {
 
     function handleBack() {
         navigation.goBack();
-    };
+    }
 
     function handleOptionChange(optionSelected: 'dataEdit' | 'passwordEdit') {
         setOption(optionSelected)
@@ -61,6 +63,55 @@ export function Profile() {
             setAvatar(result.uri);
         }
     }
+
+    async function handleProfileUpdate(){
+        try {
+            const schema = Yup.object().shape({
+                driverLicense: Yup.string()
+                    .required('CNH é obrigatoria'),
+                name: Yup.string()
+                    .required('Nome é obrigatorio')
+            });
+            const data = { name, driverLicense };
+            await schema.validate(data);
+
+            await updatedUser({
+                id: user.id,
+                user_id: user.user_id,
+                email: user.email,
+                name,
+                driver_license: driverLicense,
+                avatar,
+                token: user.token
+            });
+            Alert.alert('Perfil atualizado')
+        } catch (error){
+            console.log(error);
+            if(error instanceof Yup.ValidationError){
+                Alert.alert("Opa!", error.message);
+            } else {
+                Alert.alert("Não foi possivel atualizar o perfil");
+            }
+
+        }
+    }
+
+    async function handleSignOut(){
+        Alert.alert(
+            'Tem Certeza?',
+            'Se sair, você precisará de conexão para logar novamente',
+            [
+                {
+                    text:'Cancelar',
+                    style: 'cancel'
+                },
+                {
+                    text:'Sair',
+                    onPress: () => signOut()
+                }
+            ]
+        )
+    }
     return (
         <KeyboardAvoidingView behavior="position" enabled>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -73,7 +124,7 @@ export function Profile() {
                             />
                             <HeaderTitle>Editar Perfil</HeaderTitle>
 
-                            <LogoutButton onPress={signOut} >
+                            <LogoutButton onPress={handleSignOut} >
                                 <Feather
                                     name="power"
                                     size={24}
@@ -153,6 +204,11 @@ export function Profile() {
                             </Section>
 
                         }
+
+                        <Button
+                            title="Salvar alterações"
+                            onPress={handleProfileUpdate}
+                        />
                     </Content>
 
 

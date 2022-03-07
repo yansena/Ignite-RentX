@@ -1837,6 +1837,11 @@
     sudo-prompt "^9.0.0"
     wcwidth "^1.0.1"
 
+"@react-native-community/netinfo@^7.1.11":
+  version "7.1.11"
+  resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-7.1.11.tgz#81d3effdcb9ec64b834e4e7a4d83fa7a34d8d947"
+  integrity sha512-V6DGey0A0R19pJgp1D1h1tz/58poNs0ifI4TWR9tPtbtiHqbOanD3sSKnBHzbEpv+cLnk+ih7X7rIuxbhpd4Ag==
+
 "@react-navigation/bottom-tabs@^6.0.9":
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-6.0.9.tgz#916b6a4b495ea8fdcace98dab727064876875d09"

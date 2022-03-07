@@ -18,7 +18,7 @@ export type RootStackParamList = {
     Profile: undefined;
     FirstStep: undefined;
     SecondStep: { user: object };
-    Home: undefined;
+    AppStackRoutes: undefined;
     CarDetails: { car: CarDTO};
     Scheduling: { car: CarDTO};
     SchedulingDetails: undefined;
@@ -50,7 +50,7 @@ export function AppTabRoutes(){
             }}
         >
             <Screen
-                name="Home"
+                name="AppStackRoutes"
                 component={AppStackRoutes}
                 options={{
                     tabBarIcon: ({ color}) => (

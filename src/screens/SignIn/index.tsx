@@ -28,10 +28,6 @@ import {
     Footer
 } from './styles';
 
-interface Props {
-
-}
-
 export function SignIn() {
 
     const [ email, setEmail ] = useState('');
