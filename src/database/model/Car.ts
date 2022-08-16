@@ -26,4 +26,4 @@ class Car extends Model {
     thumbnail!: string;
 }
 
-export { Car }
+export { Car };

@@ -85,7 +85,7 @@ function AuthProvider({ children }: AuthProviderProps){
             });
 
             setData({} as User);
-        } catch (error){
+        } catch (error: any){
             throw new Error(error)
         }
     }
@@ -102,7 +102,7 @@ function AuthProvider({ children }: AuthProviderProps){
                 });
             });
             setData(user)
-        } catch (error) {
+        } catch (error: any) {
             throw new Error(error)
         }
     }
